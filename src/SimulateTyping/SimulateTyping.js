@@ -4,16 +4,22 @@ import { Wait } from '../Utils';
 class SimulateTyping extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {registeredTexts: []};
+    this.state = {
+      registeredTexts: [],
+      doNotGlitch: true,
+      renderOnce: false,
+    };
     this.registerText = this.registerText.bind(this);
     this.simulateTyping = this.simulateTyping.bind(this);
   }
-  
+
   componentDidUpdate() {
     console.log('parent');
-    this.simulateTyping();
+    if (!this.state.renderOnce) {
+      this.simulateTyping();
+    }
   }
-  
+
   registerText(text, updateTextCb, showCaretCb) {
     this.setState((state => ({
       registeredTexts: state.registeredTexts.concat([{
@@ -23,7 +29,7 @@ class SimulateTyping extends React.Component {
       }]),
     })));
   }
-  
+
   simulateTyping(){
     if (this.state.registeredTexts.length <= 0) {
       return;
@@ -39,12 +45,16 @@ class SimulateTyping extends React.Component {
             counter++;
             next(counter);
           }
+          this.setState({
+            doNotGlitch: false,
+            renderOnce: true,
+          });
         });
       };
       next(0);
     });
   }
-  
+
   updateText(regText, i, minTimeout = 140) {
     return new Promise((resolve, reject) => {
       if (regText.text.length < i++) {
@@ -57,12 +67,12 @@ class SimulateTyping extends React.Component {
       Wait(rand).then(() => this.updateText(regText, i, minTimeout)).then(() => resolve());
     })
   }
-  
-  
+
+
   render() {
     return (
       <React.Fragment>
-        {this.props.render(this.registerText, this.state.registeredTexts)}
+        {this.props.render(this.registerText, this.state.doNotGlitch)}
       </React.Fragment>
     );
   }

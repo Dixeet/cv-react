@@ -10,28 +10,28 @@ class SimulateTypingText extends Component {
     this.updateText = this.updateText.bind(this);
     this.showCaret = this.showCaret.bind(this);
   }
-  
+
   updateText(text) {
     this.setState({text: text});
   }
-  
+
   showCaret(value) {
     this.setState({showCaret: value});
   }
-  
+
   componentDidMount() {
     this.props.register(this.props.children, this.updateText, this.showCaret);
   }
-  
+
   render() {
-    
+
     return (
-      <div>
+      <React.Fragment>
         {this.state.text}
         {this.state.showCaret &&
           <span className="animated flash infinite slow">_</span>
         }
-      </div>
+      </React.Fragment>
     );
   }
 }
