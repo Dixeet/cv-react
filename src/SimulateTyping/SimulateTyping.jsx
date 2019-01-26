@@ -14,7 +14,6 @@ class SimulateTyping extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('parent');
     if (!this.state.renderOnce) {
       this.simulateTyping();
     }
