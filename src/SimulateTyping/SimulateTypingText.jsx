@@ -24,7 +24,6 @@ class SimulateTypingText extends Component {
   }
 
   render() {
-
     return (
       <React.Fragment>
         {this.state.text}

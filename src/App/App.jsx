@@ -8,16 +8,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App mx-auto max-width-4">
         <SimulateTyping render={(registerText, glitch) => (
           <div>
             <h1>
-              <GlitchingText doNotGlitch={glitch} text="Robin Lebert">
-                <SimulateTypingText register={registerText}>Robin Lebert</SimulateTypingText>
+              <GlitchingText doNotGlitch={glitch} text="CURRICULUM VITAE">
+                <SimulateTypingText register={registerText}>CURRICULUM VITAE</SimulateTypingText>
               </GlitchingText>
             </h1>
             <h2>
-              <SimulateTypingText register={registerText}>Je suis un test</SimulateTypingText>
+              <SimulateTypingText register={registerText}>de Robin Lebert</SimulateTypingText>
             </h2>
           </div>
         )}>
